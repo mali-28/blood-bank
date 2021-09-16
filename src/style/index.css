@@ -1,0 +1,382 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.container{
+  width: 90% !important;
+  margin: 0 auto;
+}
+
+
+/* padding */
+
+.p-2{
+  padding: 20px;
+}
+.p-3{
+  padding: 30px;
+}
+.pt-1{
+  padding-top: 10px;
+}
+.pl-1{
+  padding-left: 10px;
+}
+.pr-2{
+  padding-right: 20px;
+}
+.p-0-015{
+  padding : 0 15px;
+}
+.p-022-3-016-3{
+  padding : 22px 30px 16px 30px;
+}
+
+
+/* margin */
+.ml-2{
+  margin-left: 20px;
+}
+.mt-05{
+  margin-top: 05px;
+}
+.mt-06{
+  margin-top: 6px;
+}
+.mr-02{
+  margin-right: 2px;
+}
+.mb-2{
+  margin-bottom: 20px;
+}
+.m-3-auto{
+  margin: 30px auto;
+}
+
+
+
+/* classes and tags*/
+
+
+img{
+  max-width: 100%;
+ }
+
+ .bg-red{
+   background-color: red;
+ }
+ .brown{
+  color: #944317;
+}
+.cursor-pointer{
+  cursor: pointer;
+}
+.cursor-not-allowed{
+  cursor: not-allowed;
+}
+ .active-menu{
+   color: rgb(131, 7, 7) !important;
+   font-weight: 800;
+   border-bottom: 2px solid #fff;
+   padding-bottom: 5px;
+ }
+
+ .f-014 {
+   font-size: 14px;
+ }
+ .f-017{
+  font-size: 17px;
+}
+ .f-family-monospace{
+   font-family: monospace;
+ }
+ .green{
+  color: #5C9210;
+}
+ .input{
+  width: 100%;
+  padding: 5px 12px;
+  outline: none;
+  border: 1px solid #ccc
+}
+
+.header{
+  height: 70px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: red;
+}
+.nav-link:hover{
+  color:rgb(131, 7, 7);
+  text-decoration: none;
+}
+.outline-none{
+  outline: none;
+}
+.red{
+  color: red;
+}
+
+.session-title {
+  padding: 30px;
+  margin: 0px; 
+}
+  .session-title h2 {
+    width: 100%;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    font-weight: 400; 
+  }
+
+.t-bold{
+  font-weight: bold;
+}
+.t-capitalize{
+  text-transform: capitalize;
+}
+.t-decoration-none{
+  text-decoration: none;
+}
+
+.white{
+  color: #fff;
+}
+
+
+
+/* flex property */
+.align-items-center{
+  align-items: center;
+}
+.d-flex{
+  display: flex;
+}
+.flex-direction-column{
+  flex-direction: column;
+}
+.flex-direction-row{
+  flex-direction: row;
+}
+.j-content-between{
+  justify-content: space-between;
+}
+
+.j-content-spacearound{
+  justify-content: space-around;
+}
+
+
+/* height */
+
+.h-6{
+  height: 60px;
+}
+.h-7{
+  height: 70px;
+}
+
+/* width */
+.w-40{
+  width: 400px;
+}
+.w-90per{
+  width: 90%;
+}
+.w-100per{
+  width: 100%;
+}
+/* borers, radius and shadow*/
+.b-none{
+  border: none;
+}
+.bg-white{
+  background: white;
+}
+.b-1-c9  {
+  border: 1px solid #f7f5f5;
+}
+
+.br-2{
+  border-radius: 20px;
+}
+.box-shadow-ccc{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 4px 10px 0px;
+}
+/* animation */
+
+#preloader{
+  height: 100px;
+}
+#div-loader{
+  position: fixed;
+  margin: 0 -50px;
+  }
+.div1 {
+  width: 100px;
+  height: 100px;
+  border: 5px solid #0CB1C4;
+  position: relative;
+}
+.div3 {
+  width: 50px;
+  height: 50px;
+  top: 10px;
+  left: 10px;
+  border: 5px solid #0CB1C4;
+  position: absolute;
+}
+
+.div2 {
+  top: 10px;
+  left: 10px;
+  width: 80px;
+  height: 80px;
+  border: 5px solid crimson;
+  box-sizing: border-box;
+   position: absolute;
+}
+.div4 {
+  width: 30px;
+  height: 30px;
+  margin: 5px 0 0 5px;
+  border: 5px solid crimson; 
+}
+
+.spin-cw{
+  animation: spin-cw 2s infinite;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+} 
+.spin-acw{
+  animation: spin-acw 2s infinite;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}  
+ @keyframes spin-acw {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
+}
+
+
+}
+@keyframes spin-cw {
+  from {
+      transform:rotate(360deg);
+  }
+  to {
+      transform:rotate(0deg);
+}
+}
+
+.element-animation{
+  animation: animationFrames ease 2s;
+  animation-iteration-count: 2;
+  transform-origin: 50% 50%;
+  animation-fill-mode:forwards; /*when the spec is finished*/
+  -webkit-animation: animationFrames ease 1.5s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/ 
+}
+
+
+@keyframes animationFrames{
+  0% {
+    opacity:0;
+    transform:  translate(-1500px,0px)  ;
+  }
+  60% {
+    opacity:1;
+    transform:  translate(30px,0px)  ;
+  }
+  80% {
+    transform:  translate(-10px,0px)  ;
+  }
+  100% {
+    opacity:1;
+    transform:  translate(0px,0px)  ;
+  }
+}
+
+@-webkit-keyframes animationFrames {
+  0% {
+    opacity:0;
+    -webkit-transform:  translate(-1500px,0px)  ;
+  }
+  60% {
+    opacity:1;
+    -webkit-transform:  translate(30px,0px)  ;
+  }
+  80% {
+    -webkit-transform:  translate(-10px,0px)  ;
+  }
+  100% {
+    opacity:1;
+    -webkit-transform:  translate(0px,0px)  ;
+  }
+  
+  
+}
+
+
+/* ===================================== Donation Process CSS ================================== */
+.donation-care {
+  padding: 50px;
+  background-color: red; }
+  @media screen and (max-width: 940px) {
+    .donation-care {
+      padding: 30px 10px; } }
+  .donation-care h4 {
+    padding: 10px;
+    margin-bottom: 0px;
+    font-size: 1rem;
+    font-weight: 600; }
+  .donation-care p {
+    padding: 10px;
+    padding-top: 0px;
+    text-align: justify;
+    font-size: .85rem; 
+  }
+  .donation-care .vd {
+    margin-bottom: 20px;
+   }
+  .donation-care .bkjiu {
+    background-color: #F8F9FA;
+    padding: 5px; }
+    .donation-care .bkjiu .btn {
+      margin-bottom: 6px;
+      margin-left: 6px; }
+
+@media screen and (max-width: 940px) {
+  .health-care {
+    padding: 50px 10px; } }
+/* ===================================== About US CSS ================================== */
+.about-us {
+  padding: 50px;
+  background-color: #fff; }
+  @media screen and (max-width: 940px) {
+    .about-us {
+      padding: 30px 10px; } 
+    }
+  .about-us .text p {
+    font-weight: 300;
+    font-size: .9rem;
+    color: #000;
+    margin-bottom: 10px;
+    text-align: justify; 
+  }
+
