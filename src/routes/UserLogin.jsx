@@ -28,7 +28,6 @@ const UserLogin = () => {
         setMessage("")
         event.preventDefault();
         let { name, value } = event.target;
-        console.log();
         setInputData((preVal) => {
             return { ...preVal, [name]: value }
         })
@@ -44,8 +43,7 @@ const UserLogin = () => {
         signInWithEmailAndPassword(auth, inputData.email, inputData.password)
             .then((res) => {
                 if (res?.user) {
-                    console.log("mail", res.user.accessToken)
-                    setLocalStorage("__USER__", res.user.email)
+                    setLocalStorage("__USER__", {mail : res.user.email, id : res.user.uid})
                     setUser(getLocalStorage("__USER__"))
                     setLocalStorage('Islogin', res.user.accessToken);
                     setLogin(getLocalStorage("Islogin"))

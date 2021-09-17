@@ -7,7 +7,7 @@ const Context = (props) =>{
     
     
     const [login, setLogin] = useState(getLocalStorage("Islogin"));
-    const [user, setUser] = useState(getLocalStorage("__USER__"));
+    const [user, setUser] = useState(getLocalStorage("__USER__") || {});
     
 
     useEffect(()=>{

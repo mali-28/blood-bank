@@ -30,17 +30,13 @@ const TopBar = () => {
                             <>
 
                                 <NavLink className="p-0-015  f-017 white t-decoration-none t-capitalize nav-link f-family-monospace" exact activeClassName="active-menu" exact to='/donors'>DONORS</NavLink>
+                                <NavLink className="p-0-015  f-017 white t-decoration-none t-capitalize nav-link f-family-monospace" exact activeClassName="active-menu" exact to='/map'>Map</NavLink>
                                 <NavLink
                                     onClick={() => { setLogin(localStorage.removeItem("Islogin"), setUser(localStorage.removeItem("__USER__"))) }}
                                     className="p-0-015 f-017 t-capitalize white t-decoration-none nav-link  f-family-monospace" exact activeClassName="active-menu" exact to='/login'>LOGOUT
                                 </NavLink>
 
                             </>}
-
-
-
-
-
                     </div>
                 </div>
             </div>

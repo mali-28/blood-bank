@@ -68,8 +68,7 @@ const UserSignUp = () => {
         .then((res) => {
           // Signed in 
           if (res?.user) {
-            console.log("mail", res.user.accessToken)
-            setLocalStorage("__USER__", res.user.email)
+            setLocalStorage("__USER__", {mail : res.user.email, id : res.user.uid})
             setUser(getLocalStorage("__USER__"))
             setLocalStorage('Islogin', res.user.accessToken);
             setLogin(getLocalStorage("Islogin"))
