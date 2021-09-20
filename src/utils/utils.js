@@ -1,3 +1,5 @@
+import { getDatabase, ref,child, get } from "firebase/database";
+
 import { regUserName, regEmail } from "../constants/constant";
 
 export const getLocalStorage = (key) =>{
@@ -78,4 +80,6 @@ export const validateUserName = (name) => {
     }
     return "";
   };
+
+  
   

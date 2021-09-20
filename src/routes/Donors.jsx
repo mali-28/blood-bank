@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { getDatabase, ref, set } from "firebase/database";
+import { NavLink, useHistory } from 'react-router-dom';
+import { getDatabase, ref, set,child, get } from "firebase/database";
 import { loginContext } from "../context/context";
 import InputField from '../components/InputField';
 import {
@@ -8,11 +8,11 @@ import {
 } from "../utils/utils";
 // import Loader from '../components/Loader';
 const Userdonor = () => {
-    const location =  () =>{
+    const getlocation =  () =>{
         return new Promise((resolve, reject) => {
             window.navigator.geolocation.getCurrentPosition((geoLocation) => {
-                console.log(geoLocation)
-                  resolve(geoLocation)
+                console.log("geo",geoLocation.coords.latitude)
+                  resolve({latitude : geoLocation.coords.latitude, longitude : geoLocation.coords.longitude})
                },(error) => {
                    reject(error)
                });
@@ -20,15 +20,14 @@ const Userdonor = () => {
         })
         
     }
-    const { login, user } = useContext(loginContext);
+    const { login, user,showData,setShowData } = useContext(loginContext);
     console.log("user", user)
 
-    function writeUserData(userId, userName, email, imageUrl) {
+    function writeUserData(userId, data) {
         const db = getDatabase();
+        console.log("db",db)
         set(ref(db, 'users/' + userId), {
-          username: userName,
-          email: email,
-          profile_picture : imageUrl
+          userData: data,
         });
       }
     const [loading, setLoading] = useState(false);
@@ -62,7 +61,19 @@ const Userdonor = () => {
 
     }
 
-
+useEffect(()=>{
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `users`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        setShowData(snapshot.val())
+        console.log("data" ,snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+},[])
     // Save this as fetch.js --------------------------------------------------------------------------
 
     const click = async() => {
@@ -76,9 +87,9 @@ const Userdonor = () => {
         }else {
 
             setErrorTypeName("");
-            const geo = await  location();
-            console.log({geo})
-            writeUserData(user.id,{name : donorData.name, phone : donorData.phone, bloodGroup : donorData.bloodGroup, location : geo }, user.mail, "")
+            const {latitude, longitude} = await getlocation();
+            // console.log({geo})
+            writeUserData(user.id,{id: user.id, name : donorData.name, email :  user.mail, phone : donorData.phone, bloodGroup : donorData.bloodGroup, longitude, latitude})
             
               setDonorData({
                 name: '',
@@ -123,6 +134,37 @@ const Userdonor = () => {
 
 
         </div>
+
+        <div>
+            <table className="table">
+                <thead>
+                    <tr className="text-danger">
+                        <td>name</td>
+                        <td>email</td>
+                        <td>BloodGroup</td>
+                        <td>Latitude</td>
+                        <td>Longitude</td>
+                        <td>profile</td>
+                    </tr>
+                </thead>
+                <tbody className="text-secondary">
+                    {Object.values(showData)?.map(val => {
+            console.log("val",val.userData.bloodGroup)
+        return<>
+            <tr key={val.userData.id}>
+                <td>{val.userData.name}</td>
+                <td> {val.userData.email}</td>
+                <td>{val.userData.bloodGroup}</td>
+                <td>{val.userData.latitude}</td>
+                <td>{val.userData.longitude}</td>
+                <td><NavLink to={`/donor/${val.userData.id}`}><button className="btn btn-danger">Donor </button></NavLink></td>
+
+            </tr>
+        </>
+        })
+         }
+         </tbody>
+         </table></div>
 
 
 

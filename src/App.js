@@ -8,6 +8,7 @@ import Context from './context/context'
 import "./firebase";
 import Donors from "./routes/Donors";
 import Map from "./routes/Map";
+import Donor from "./routes/Donor";
 const App = () =>{
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ const App = () =>{
       <Route exact path="/signup" component={UserSignUp}/>
       <Route exact path="/donors" component={Donors}/>
       <Route exact path="/map" component={Map}/>
+      <Route exact path="/donor/:id" component={Donor}/>
       <Redirect  to="/"/>
       </Switch>
       </Context>
