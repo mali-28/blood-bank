@@ -1,6 +1,6 @@
-import { getDatabase, ref,child, get } from "firebase/database";
-
 import { regUserName, regEmail } from "../constants/constant";
+
+
 
 export const getLocalStorage = (key) =>{
     try{
@@ -82,4 +82,15 @@ export const validateUserName = (name) => {
   };
 
   
+  export const getlocation = () => {
+    return new Promise((resolve, reject) => {
+        window.navigator.geolocation.getCurrentPosition((geoLocation) => {
+            console.log("geo", geoLocation.coords.latitude)
+            resolve({ latitude: geoLocation.coords.latitude, longitude: geoLocation.coords.longitude })
+        }, (error) => {
+            reject(error)
+        });
   
+    })
+  
+  }
