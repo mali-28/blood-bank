@@ -1,5 +1,7 @@
 import { regUserName, regEmail } from "../constants/constant";
 
+
+
 export const getLocalStorage = (key) =>{
     try{
     if(key){
@@ -78,4 +80,17 @@ export const validateUserName = (name) => {
     }
     return "";
   };
+
   
+  export const getlocation = () => {
+    return new Promise((resolve, reject) => {
+        window.navigator.geolocation.getCurrentPosition((geoLocation) => {
+            console.log("geo", geoLocation.coords.latitude)
+            resolve({ latitude: geoLocation.coords.latitude, longitude: geoLocation.coords.longitude })
+        }, (error) => {
+            reject(error)
+        });
+  
+    })
+  
+  }

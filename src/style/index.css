@@ -138,7 +138,10 @@ img{
     font-family: 'Merriweather', serif;
     font-weight: 400; 
   }
-
+  .table tr td {
+    border: 1px solid #ccc;
+    /* border-collapse: collapse; */
+  }
 .t-bold{
   font-weight: bold;
 }
