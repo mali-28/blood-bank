@@ -25,7 +25,7 @@ export const MapContainer = (props)=>{
             lat: userLocation.lat1,
             lng: userLocation.long1
           }}
-        zoom={18}>
+        zoom={14}>
       <Marker
         title={'Your Location'}
         position={{lat: userLocation.lat1, lng: userLocation.long1}} />
