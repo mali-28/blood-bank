@@ -1,75 +1,44 @@
-import React, { Component } from "react";
-import {
-    withGoogleMap,
-    withScriptjs,
-    GoogleMap,
-    DirectionsRenderer
-} from "react-google-maps";
+import React, { useEffect } from 'react';
+import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
+import { useContext } from "react";
+import { useHistory} from "react-router-dom";
+import { loginContext } from "../context/context";
 
-class MapDirection extends Component {
-    state = {
-        directions: null,
+ 
+export const MapContainer = (props)=>{
 
-
-};
-
-
-componentDidMount() {
-    const directionsService = new window.google.maps.DirectionsService();
-
-    const origin = { lat: 22.5244, lng:  3.3792 };
-    const destination = { lat: 64.667, lng:  3.4500};
-
-    directionsService.route(
-        {
-            origin: origin,
-            destination: destination,
-            travelMode: window.google.maps.TravelMode.DRIVING,
-            waypoints: [
-                {
-                    location: new window.google.maps.LatLng(24.698,  66.852)
-                },
-                {
-                    location: new window.google.maps.LatLng(23.018,3.3515)
-                }
-            ]
-        },
-        (result, status) => {
-            if (status === window.google.maps.DirectionsStatus.OK) {
-                console.log(result)
-                this.setState({
-                    directions: result
-                });
-            } else {
-                console.error(`error fetching directions ${result}`);
-            }
-        }
-    );
-}
-
-render() {
-    const GoogleMapExample = withGoogleMap(props => (
-        <GoogleMap
-            defaultCenter={{ lat: 6.5244, lng:  3.3792 }}
-            defaultZoom={13}
-        >
-            <DirectionsRenderer
-                directions={this.state.directions}
-            />
-        </GoogleMap>
-    ));
-
+    const {login, user, userLocation } = useContext(loginContext);
+    const history = useHistory();
+    
+    useEffect(() => {
+      if (!login || !user) {
+          history.replace("login")
+      }
+  }, [login, user])
     return (
-        <div>
-            <GoogleMapExample
-                containerElement={<div style={{ height: `500px`, width: "500px" }} />}
-                mapElement={<div style={{ height: `100%` }} />}
-            />
-        </div>
-
-
-       );
-    }
+      <>
+      <button onClick={()=>{history.goBack()}} className="btn btn-info">Go Back</button>
+        <Map google={props.google}
+        style={{width: '100%', height: '100%', position: 'relative'}}
+        className={'map'}
+        initialCenter={{
+            lat: userLocation.lat1,
+            lng: userLocation.long1
+          }}
+        zoom={18}>
+      <Marker
+        title={'Your Location'}
+        position={{lat: userLocation.lat1, lng: userLocation.long1}} />
+      <Marker
+      title={"Destination"}
+        position={{lat: userLocation.lat2, lng: userLocation.long2}} 
+        />
+    </Map>
+    </>
+    );
+  
 }
-
-export default MapDirection;
+ 
+export default GoogleApiWrapper({
+  apiKey: "AIzaSyCXAeItiCHU5NHOzgn9GyO4fRHiqK7tnUs"
+})(MapContainer)

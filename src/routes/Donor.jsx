@@ -25,6 +25,11 @@ const click = async () =>{
     console.log("lati",latitude, "long", longitude, "datalat", data.latitude, "datalong", data.longitude)
     setLocalStorage("location",{lat1 : latitude, long1 : longitude, lat2 : data.latitude, long2: data.longitude})
     setUserLocation(getLocalStorage("location"));
+    history.push("./../map")
+}
+
+const goBack = () =>{
+    history.goBack()
 }
     useEffect(() => {
         if (!login || !user) {
@@ -35,10 +40,10 @@ const click = async () =>{
 
     return <>
         <div style={{height : "90vh",display: "flex", justifyContent: "center", alignItems:"center", }}>
-            {data ? <><div style={{display : "flex",justifyContent: "space-between", alignItems: "center",width: 500, minHeight: 300, border: "1px solid #ccc", borderRadius: 30, overflow : "hidden", padding: 20}}>
+            {data ? <><div style={{display : "flex",justifyContent: "center", alignItems: "center",width: 500, minHeight: 300, borderRadius: 30, overflow : "hidden", padding: 20}}>
                  <div style={{textTransform : "capitalize"}}>
-                     <table className="table">
-                         <tr>
+                     <table className="table table-b-red">
+                         <tr className="">
                              <td>name</td>
                              <td>{data.name}</td>
                          </tr>
@@ -62,12 +67,20 @@ const click = async () =>{
                              <td>latitude</td>
                              <td>{data.latitude}</td>
                          </tr>
+                         <tr>
+                         <td>
+                             <button className="btn btn-info" onClick={()=>{goBack()}}>Go back</button>
+                             </td>
+                             <td>
+                             <button className="btn btn-danger" onClick={()=>{click()}}>Go to map</button>
+                             </td>
+                         </tr>
                      </table>
                      
                  </div>
                  
                  <div>
-                    <button onClick={()=>{click(); history.push("./../map")}}>direction</button>
+                    
                  </div>
                 </div></> : null}
         </div>

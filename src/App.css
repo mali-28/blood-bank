@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+div.scroll {
+                margin: 4px, 4px;
+                padding: 4px;
+                width: 300px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                white-space: nowrap;
+            }

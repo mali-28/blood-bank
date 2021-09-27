@@ -1,16 +1,19 @@
-import { getDatabase, ref, child, get } from "firebase/database";
+import { getDatabase, ref, child, get, onChildChanged , onChildAdded, onChildRemoved, remove} from "firebase/database";
 import React, { createContext, useEffect, useState } from "react";
-import {getLocalStorage, } from "../utils/utils";
+import { getLocalStorage, } from "../utils/utils";
 
 const loginContext = createContext({
     login: "",
     user: "",
     showData: "",
-    userLocation : "",
+    userLocation: "",
+    isDonor : "",
     setLogin: () => { },
     setUser: () => { },
     setShowData: () => { },
-    setUserLocation : () =>{},
+    setUserLocation: () => { },
+    removeItem : () => {},
+    setIsDonor : () =>{}
 });
 
 const Context = (props) => {
@@ -19,38 +22,82 @@ const Context = (props) => {
     const [login, setLogin] = useState(getLocalStorage("Islogin"));
     const [user, setUser] = useState(getLocalStorage("__USER__") || {});
     const [userLocation, setUserLocation] = useState(getLocalStorage("location") || [])
+    const [isDonor, setIsDonor] = useState(false)
     const [showData, setShowData] = useState({});
 
+
+    const database =  () =>{
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, `users`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                setShowData(snapshot.val())
+            } else {
+                setShowData({})
+            }
+        }).catch((error) => {
+            console.error(error);
+        })
+
+    }
 
     useEffect(() => {
 
         const token = getLocalStorage("Islogin");
-
+        const db = getDatabase();
         setLogin(token);
 
+        onChildChanged(ref(db, '/users'), (snapshot) => {
+            if (snapshot.exists()) {
+                const updatedData =  snapshot.val();
+                setShowData((pre)=> {
+                    return {...pre, [updatedData.userData.id] : updatedData}
+                })
+            } else {
+                console.log("No data available");
+
+            }
+            // ...
+        });
+        
+        onChildAdded(ref(db, '/users'), (snapshot) => {
+            if (snapshot.exists()) {
+                const newData =  snapshot.val();
+                setShowData((pre)=> {
+                    return {...pre, [newData.userData.id] : newData}
+                })
+            } else {
+                console.log("No data available");
+
+            }
+        });
+
+        
+        
+        
+      
+       
     }, [])
 
-useEffect(()=>{
-    const dbRef = ref(getDatabase());
-    get(child(dbRef, `users`)).then((snapshot) => {
-        if (snapshot.exists()) {
-            // console.log("data" ,snapshot.val());
-            setShowData(snapshot.val())
-        } else {
-            setShowData({})
-            console.log("No data available");
 
-        }
-    }).catch((error) => {
-        console.error(error);
-    })
-}, [])
+    const removeItem = (key) =>{
+        const gdb = ref(getDatabase());
+        remove(child(gdb, `users/${key}`))
+
+        database();
+        setIsDonor(false);
+
+    }
+
+    useEffect(() => {
+        
+        database();
+    }, [])
 
 
-return <>
-    <loginContext.Provider value={{ login, setLogin, user, setUser, showData, setShowData,userLocation, setUserLocation }}>
-        {props.children}
-    </loginContext.Provider></>
+    return <>
+        <loginContext.Provider value={{ login, setLogin, user, setUser, showData, setShowData, userLocation, setUserLocation, removeItem,isDonor, setIsDonor}}>
+            {props.children}
+        </loginContext.Provider></>
 
 }
 

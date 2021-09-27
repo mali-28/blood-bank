@@ -138,8 +138,12 @@ img{
     font-family: 'Merriweather', serif;
     font-weight: 400; 
   }
-  .table tr td {
+  .table-b-ccc tr td {
     border: 1px solid #ccc;
+    /* border-collapse: collapse; */
+  }
+  .table-b-red tr td {
+    border: 1px solid red;
     /* border-collapse: collapse; */
   }
 .t-bold{
@@ -383,3 +387,28 @@ img{
     text-align: justify; 
   }
 
+  .scroll {
+    overflow-x: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 5px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(179, 173, 173); 
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #d3cfcfc0; 
+  cursor:wait;
+}
