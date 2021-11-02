@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/gok-stream - react-coding-challange-2
 /.pnp
 .pnp.js
 
