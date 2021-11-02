@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { useContext, useEffect } from "react";
-import { useParams, useHistory, NavLink } from "react-router-dom"
+import { useState, useContext, useEffect  } from "react";
+import { useParams, useHistory } from "react-router-dom"
 import { loginContext } from "../context/context";
 import { getLocalStorage, getlocation, setLocalStorage } from "../utils/utils";
 
 const Donor = () => {
     const { id } = useParams();
     const history = useHistory();
-    const { login, user, showData, userLocation, setUserLocation } = useContext(loginContext);
+    const { login, user, showData, setUserLocation } = useContext(loginContext);
     const [data, setData] = useState([]);
 
     useEffect(() => {

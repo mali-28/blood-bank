@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useContext } from 'react';
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
-import { useContext } from "react";
 import { useHistory} from "react-router-dom";
 import { loginContext } from "../context/context";
 

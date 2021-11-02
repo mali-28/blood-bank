@@ -1,4 +1,4 @@
-import { getDatabase, ref, child, get, onChildChanged , onChildAdded, onChildRemoved, remove} from "firebase/database";
+import { getDatabase, ref, child, get, onChildChanged , onChildAdded, remove} from "firebase/database";
 import React, { createContext, useEffect, useState } from "react";
 import { getLocalStorage, } from "../utils/utils";
 
@@ -8,10 +8,10 @@ const loginContext = createContext({
     showData: "",
     userLocation: "",
     isDonor : "",
-    setLogin: () => { },
-    setUser: () => { },
-    setShowData: () => { },
-    setUserLocation: () => { },
+    setLogin: () =>{},
+    setUser: () => {},
+    setShowData: () => {},
+    setUserLocation: () => {},
     removeItem : () => {},
     setIsDonor : () =>{}
 });
@@ -24,8 +24,7 @@ const Context = (props) => {
     const [userLocation, setUserLocation] = useState(getLocalStorage("location") || [])
     const [isDonor, setIsDonor] = useState(false)
     const [showData, setShowData] = useState({});
-
-
+    
     const database =  () =>{
         const dbRef = ref(getDatabase());
         get(child(dbRef, `users`)).then((snapshot) => {
@@ -35,17 +34,17 @@ const Context = (props) => {
                 setShowData({})
             }
         }).catch((error) => {
-            console.error(error);
+            alert(error.message);
         })
-
+        
     }
-
+    
     useEffect(() => {
-
+        
         const token = getLocalStorage("Islogin");
         const db = getDatabase();
         setLogin(token);
-
+        
         onChildChanged(ref(db, '/users'), (snapshot) => {
             if (snapshot.exists()) {
                 const updatedData =  snapshot.val();
@@ -67,37 +66,31 @@ const Context = (props) => {
                 })
             } else {
                 console.log("No data available");
-
+                
             }
         });
-
         
-        
-        
-      
-       
     }, [])
-
-
+    
+    
     const removeItem = (key) =>{
         const gdb = ref(getDatabase());
         remove(child(gdb, `users/${key}`))
-
+        
         database();
         setIsDonor(false);
-
+        
     }
 
     useEffect(() => {
         
         database();
     }, [])
+     
 
-
-    return <>
-        <loginContext.Provider value={{ login, setLogin, user, setUser, showData, setShowData, userLocation, setUserLocation, removeItem,isDonor, setIsDonor}}>
+    return <loginContext.Provider value={{ login, setLogin, user, setUser, showData, setShowData, userLocation, setUserLocation, removeItem,isDonor, setIsDonor}}>
             {props.children}
-        </loginContext.Provider></>
+        </loginContext.Provider>
 
 }
 

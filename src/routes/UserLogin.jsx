@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { NavLink } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
+import { NavLink,useHistory  } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getLocalStorage, setLocalStorage } from "../utils/utils";
 import Loader from "../components/Loader";
@@ -85,5 +84,4 @@ const UserLogin = () => {
 
     </>
 }
-
 export default UserLogin;
